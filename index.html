@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Копіювання IBAN</title>
+  <title>Реквізити для оплати Центра Трейд</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -72,7 +72,7 @@
       margin-top: 10px;
     }
     .accordion-item {
-      background: white;
+      background: #f0f0f0;
       margin-bottom: 5px;
       border-radius: 8px;
       overflow: hidden;
@@ -84,7 +84,7 @@
       cursor: pointer;
       padding: 15px;
       font-weight: bold;
-      background: #f9f9ff;
+      background: #f0f0f0;
     }
     .accordion-body {
       display: none;
@@ -106,10 +106,17 @@
       font-size: 16px;
       font-weight: bold;
     }
+    .info-label {
+      align:center;
+      padding: 20px;
+      font-size: 16px;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
 <img src="IMG_4668.PNG" alt="Логотип" class="logo">
+<div class="info-label">Реквізити для оплати <br>Центра трейд</div>
 <div class="container">
   <label>IBAN</label>
   <div class="iban-container">
@@ -118,12 +125,12 @@
   </div>
   <label>Одержувач</label>
   <div class="iban-container">
-    <input type="text" class="ibanField" value="UA253052990000026002041017894" readonly>
+    <input type="text" class="ibanField" value="ТОВ «ЦЕНТРА ТРЕЙД»" readonly>
     <button class="copyBtn">КОПІЮВАТИ</button>
   </div>
   <label>ЄДРПОУ</label>
   <div class="iban-container">
-    <input type="text" class="ibanField" value="UA313052990000026002041017895" readonly>
+    <input type="text" class="ibanField" value="43614688" readonly>
     <button class="copyBtn">КОПІЮВАТИ</button>
   </div>
 </div>
