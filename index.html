@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
+  <link rel="icon" type="image/png" href="photo/глобус%20золото.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Реквізити для оплати Центра Трейд</title>
@@ -14,6 +15,7 @@
       align-items: center;
       min-height: 100vh;
       margin: 0;
+      padding-bottom: 20px;
     }
     .logo {
       max-width: 200px;
@@ -21,11 +23,11 @@
     }
     .container {
       background: white;
-      padding: 20px;
+      padding: 25px;
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
       border-radius: 8px;
       text-align: left;
-      width: 100%;
+      width: 90%;
       max-width: 400px;
     }
     label {
@@ -35,6 +37,7 @@
     }
     .iban-container {
       display: flex;
+      padding:1px;
       align-items: center;
       margin-bottom: 10px;
     }
@@ -66,12 +69,12 @@
       background-color: green !important;
     }
     .accordion {
-      width: 100%;
-      max-width: 600px;
+      width: 90%;
+      max-width: 450px;
       margin-top: 10px;
     }
     .accordion-item {
-      background: #f0f0f0;
+      background: white;
       margin-bottom: 5px;
       border-radius: 8px;
       overflow: hidden;
@@ -83,22 +86,25 @@
       cursor: pointer;
       padding: 15px;
       font-weight: bold;
-      background: #f0f0f0;
+      background: white;
     }
     .accordion-body {
       display: none;
       padding: 15px;
-      max-width: 60%;
-
+      text-align: center;
+      cursor: pointer;
     }
     .accordion-item.active .accordion-body {
       display: block;
     }
     .accordion-body img {
-      max-width: 100%;
+      max-width: 70%;
       height: auto;
       display: block;
-      margin: 10px 0;
+      margin: 10px auto;
+    }
+    .accordion-item.active .accordion-body {
+      display: block;
     }
     .instruction-label {
       margin-top: 20px;
@@ -106,15 +112,16 @@
       font-weight: bold;
     }
     .info-label {
-      align:center;
       padding: 20px;
       font-size: 16px;
       font-weight: bold;
+      text-align: center;
+      margin-bottom: 10px;
     }
   </style>
 </head>
 <body>
-<img src="IMG_4668.PNG" alt="Логотип" class="logo">
+<img src="photo/IMG_4668.PNG" alt="Логотип" class="logo">
 <div class="info-label">Реквізити для оплати <br>Центра трейд</div>
 <div class="container">
   <label>IBAN</label>
@@ -160,28 +167,7 @@
     </div>
   </div>
 </div>
-<script>
-  document.querySelectorAll(".copyBtn").forEach(button => {
-    button.addEventListener("click", function() {
-      let ibanField = this.previousElementSibling;
-      navigator.clipboard.writeText(ibanField.value).then(() => {
-        this.textContent = "СКОПІЙОВАНО";
-        this.classList.add("copied");
-        setTimeout(() => {
-          this.textContent = "КОПІЮВАТИ";
-          this.classList.remove("copied");
-        }, 2000);
-      }).catch(err => {
-        alert("Помилка копіювання: " + err);
-      });
-    });
-  });
-  document.querySelectorAll(".accordion-header").forEach(header => {
-    header.addEventListener("click", function() {
-      this.parentElement.classList.toggle("active");
-    });
-  });
-</script>
+
 <script>
   document.querySelectorAll(".copyBtn").forEach(button => {
     button.addEventListener("click", function() {
@@ -205,7 +191,21 @@
       }
       document.body.removeChild(textArea);
     });
+
   });
+  document.querySelectorAll(".accordion-header").forEach(header => {
+    header.addEventListener("click", function() {
+      let item = this.parentElement;
+      item.classList.toggle("active");
+    });
+  });
+
+  document.querySelectorAll(".accordion-body").forEach(body => {
+    body.addEventListener("click", function() {
+      this.parentElement.classList.remove("active");
+    });
+  });
+
 </script>
 </body>
 </html>
