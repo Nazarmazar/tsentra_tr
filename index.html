@@ -91,23 +91,24 @@
   document.querySelectorAll(".copyBtn").forEach(button => {
     button.addEventListener("click", function() {
       let ibanField = this.previousElementSibling;
-
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(ibanField.value).then(() => {
-          this.textContent = "СКОПІЙОВАНО";
-          this.classList.add("copied");
-          setTimeout(() => {
-            this.textContent = "КОПІЮВАТИ";
-            this.classList.remove("copied");
-          }, 2000);
-        }).catch(err => {
-          console.error("Помилка копіювання:", err);
-          alert("Не вдалося скопіювати текст. Спробуйте вручну.");
-        });
-      } else {
-        console.warn("Буфер обміну недоступний.");
-        alert("Ваш браузер не підтримує автоматичне копіювання. Спробуйте вручну.");
+      let textArea = document.createElement("textarea");
+      textArea.value = ibanField.value;
+      document.body.appendChild(textArea);
+      textArea.select();
+      textArea.setSelectionRange(0, 99999);
+      try {
+        document.execCommand("copy");
+        this.textContent = "СКОПІЙОВАНО";
+        this.classList.add("copied");
+        setTimeout(() => {
+          this.textContent = "КОПІЮВАТИ";
+          this.classList.remove("copied");
+        }, 2000);
+      } catch (err) {
+        console.error("Помилка копіювання:", err);
+        alert("Не вдалося скопіювати текст. Спробуйте вручну.");
       }
+      document.body.removeChild(textArea);
     });
   });
 </script>
