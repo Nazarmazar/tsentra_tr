@@ -6,6 +6,10 @@
   <title>Реквізити для оплати Центра Трейд</title>
   <link rel="icon" type="image/png" href="photo/глобус%20золото.png">
   <style>
+    .logo {
+      max-width: 200px;
+      padding: 15px;
+    }
     body {
       font-family: Arial, sans-serif;
       background-color: #f4f4f4;
@@ -15,70 +19,62 @@
       align-items: center;
       min-height: 100vh;
       margin: 0;
-      padding-bottom: 20px;
     }
-
-    .logo {
-      max-width: 200px;
-      padding: 15px;
-    }
-
     .container {
       background: white;
-      width: 90%;
-      max-width: 400px;
-      padding: 25px;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
       border-radius: 8px;
-      text-align: left;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 450px;
+      width: 90%;
     }
-
     label {
       font-weight: bold;
       display: block;
       margin-bottom: 5px;
     }
-
-    .iban-container {
+    .input-group {
       display: flex;
-      align-items: stretch;
+      width: 100%;
+      align-items: center;
       margin-bottom: 10px;
-      flex-wrap: nowrap;
+      overflow: hidden;
     }
-
-    input.ibanField {
-      flex: 1;
+    input {
+      flex-grow: 1;
       background-color: #f0f0f0;
       border: 1px solid #ccc;
-      padding: 10px;
+      padding: 12px;
       font-size: 16px;
       font-weight: bold;
       text-align: center;
       border-radius: 4px 0 0 4px;
-      min-width: 0;
-      box-sizing: border-box;
-      cursor: default;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
-
-    button.copyBtn {
-      padding: 0 14px;
-      font-size: 14px;
+    button {
+      padding: 12px 16px;
+      font-size: 16px;
       background-color: black;
       color: white;
       border: 1px solid black;
-      border-left: none;
       border-radius: 0 4px 4px 0;
       cursor: pointer;
       transition: background-color 0.3s;
-      box-sizing: border-box;
+      flex-shrink: 0;
+      white-space: nowrap;
     }
-
-    button.copyBtn:hover {
+    button:hover {
       background-color: #333;
     }
-
     .copied {
       background-color: green !important;
+    }
+    .input-group input {
+      min-width: 0;
+      flex: 1 1 auto;
+      max-width: calc(100% - 100px);
     }
 
     .instruction-label {
@@ -149,19 +145,17 @@
 
 <div class="container">
   <label>IBAN</label>
-  <div class="iban-container">
+  <div class="input-group">
     <input type="text" class="ibanField" value="UA193052990000026002041017893" readonly>
     <button class="copyBtn">КОПІЮВАТИ</button>
   </div>
-
   <label>Одержувач</label>
-  <div class="iban-container">
+  <div class="input-group">
     <input type="text" class="ibanField" value="ТОВ «ЦЕНТРА ТРЕЙД»" readonly>
     <button class="copyBtn">КОПІЮВАТИ</button>
   </div>
-
   <label>ЄДРПОУ</label>
-  <div class="iban-container">
+  <div class="input-group">
     <input type="text" class="ibanField" value="43614688" readonly>
     <button class="copyBtn">КОПІЮВАТИ</button>
   </div>
@@ -197,25 +191,20 @@
 
 <script>
   document.querySelectorAll(".copyBtn").forEach(button => {
-    button.addEventListener("click", function () {
-      const input = this.previousElementSibling;
-      const textarea = document.createElement("textarea");
-      textarea.value = input.value;
-      document.body.appendChild(textarea);
-      textarea.select();
-      try {
-        document.execCommand("copy");
-        this.textContent = "СКОПІЙОВАНО";
-        this.classList.add("copied");
-        setTimeout(() => {
-          this.textContent = "КОПІЮВАТИ";
-          this.classList.remove("copied");
-        }, 2000);
-      } catch (err) {
-        console.error("Помилка копіювання:", err);
-        alert("Не вдалося скопіювати текст. Спробуйте вручну.");
-      }
-      document.body.removeChild(textarea);
+    button.addEventListener("click", function() {
+      let inputField = this.previousElementSibling;
+      let textArea = document.createElement("textarea");
+      textArea.value = inputField.value;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textArea);
+      this.textContent = "СКОПІЙОВАНО";
+      this.classList.add("copied");
+      setTimeout(() => {
+        this.textContent = "КОПІЮВАТИ";
+        this.classList.remove("copied");
+      }, 2000);
     });
   });
 
